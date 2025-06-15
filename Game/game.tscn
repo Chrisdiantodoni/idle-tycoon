@@ -1,0 +1,42 @@
+[gd_scene load_steps=7 format=3 uid="uid://dvs8qugs8x5ya"]
+
+[ext_resource type="Texture2D" uid="uid://dhe7eawv0nl5d" path="res://Assets/Sprites/Bakground.png" id="1_fwxkx"]
+[ext_resource type="Texture2D" uid="uid://dup5i2mf4tg7s" path="res://Assets/Sprites/Counter.png" id="2_qmv3x"]
+[ext_resource type="Texture2D" uid="uid://he5sde7f28y8" path="res://Assets/Sprites/Counter_half.png" id="3_oomkl"]
+[ext_resource type="Texture2D" uid="uid://d3kmgqdhp64f0" path="res://Assets/Sprites/UI/Coffee.png" id="4_buohc"]
+[ext_resource type="Texture2D" uid="uid://1r2jwwlsrndi" path="res://Assets/Sprites/UI/Burger.png" id="5_kul4i"]
+[ext_resource type="PackedScene" uid="uid://d3h546c6atfkc" path="res://Cashier/cashier.tscn" id="6_qmv3x"]
+
+[node name="Game" type="Node2D"]
+
+[node name="BG" type="Sprite2D" parent="."]
+texture = ExtResource("1_fwxkx")
+centered = false
+
+[node name="MainCounter" type="Sprite2D" parent="BG"]
+position = Vector2(537, 855)
+scale = Vector2(0.9, 0.9)
+texture = ExtResource("2_qmv3x")
+
+[node name="CoffeeCounter" type="Sprite2D" parent="BG"]
+position = Vector2(417, 1382)
+scale = Vector2(0.8, 0.9)
+texture = ExtResource("3_oomkl")
+
+[node name="CoffeeIcon" type="Sprite2D" parent="BG/CoffeeCounter"]
+position = Vector2(-65, -65.5555)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("4_buohc")
+
+[node name="BurgerCounter" type="Sprite2D" parent="BG"]
+position = Vector2(657, 1382)
+scale = Vector2(0.8, 0.9)
+texture = ExtResource("3_oomkl")
+
+[node name="BurgerIcon" type="Sprite2D" parent="BG/BurgerCounter"]
+position = Vector2(-65, -65.5555)
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("5_kul4i")
+
+[node name="Cashier" parent="." instance=ExtResource("6_qmv3x")]
+position = Vector2(537, 1100)
