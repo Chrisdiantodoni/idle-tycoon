@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dvs8qugs8x5ya"]
+[gd_scene load_steps=15 format=3 uid="uid://dvs8qugs8x5ya"]
 
 [ext_resource type="Texture2D" uid="uid://dhe7eawv0nl5d" path="res://Assets/Sprites/Bakground.png" id="1_fwxkx"]
 [ext_resource type="Texture2D" uid="uid://dup5i2mf4tg7s" path="res://Assets/Sprites/Counter.png" id="2_qmv3x"]
@@ -6,6 +6,14 @@
 [ext_resource type="Texture2D" uid="uid://d3kmgqdhp64f0" path="res://Assets/Sprites/UI/Coffee.png" id="4_buohc"]
 [ext_resource type="Texture2D" uid="uid://1r2jwwlsrndi" path="res://Assets/Sprites/UI/Burger.png" id="5_kul4i"]
 [ext_resource type="PackedScene" uid="uid://d3h546c6atfkc" path="res://Cashier/cashier.tscn" id="6_qmv3x"]
+[ext_resource type="Script" uid="uid://cxkc81x48pg10" path="res://Manager/customer_manager.gd" id="7_oomkl"]
+[ext_resource type="Script" uid="uid://c45nve1l81xui" path="res://data/customer_data.gd" id="8_72g0p"]
+[ext_resource type="Resource" uid="uid://8uedwcl2b1u3" path="res://data/customer_green.tres" id="9_4lqr4"]
+[ext_resource type="Resource" uid="uid://c1jpvw13veh3i" path="res://data/customer_pink.tres" id="10_qlwvw"]
+[ext_resource type="Resource" uid="uid://cp1yfnigo4rd1" path="res://data/customer_purple.tres" id="11_rpdke"]
+[ext_resource type="Resource" uid="uid://b5d7762c6gqep" path="res://data/customer_red.tres" id="12_33n3b"]
+[ext_resource type="Resource" uid="uid://qu476hfkiowf" path="res://data/customer_yellow.tres" id="13_rxmp4"]
+[ext_resource type="PackedScene" uid="uid://b0abptabrbn62" path="res://Customer/customer.tscn" id="14_4lqr4"]
 
 [node name="Game" type="Node2D"]
 
@@ -40,3 +48,21 @@ texture = ExtResource("5_kul4i")
 
 [node name="Cashier" parent="." instance=ExtResource("6_qmv3x")]
 position = Vector2(537, 1100)
+
+[node name="CustomerManager" type="Node" parent="." node_paths=PackedStringArray("spawn_positions")]
+script = ExtResource("7_oomkl")
+spawn_positions = [NodePath("TopSpawnPos"), NodePath("BottomSpawnPos")]
+customer_sprites = Array[ExtResource("8_72g0p")]([ExtResource("9_4lqr4"), ExtResource("10_qlwvw"), ExtResource("11_rpdke"), ExtResource("12_33n3b"), ExtResource("13_rxmp4")])
+customer_scene = ExtResource("14_4lqr4")
+
+[node name="SpawnTimer" type="Timer" parent="CustomerManager"]
+wait_time = 4.0
+autostart = true
+
+[node name="TopSpawnPos" type="Marker2D" parent="CustomerManager"]
+position = Vector2(-67, 205)
+
+[node name="BottomSpawnPos" type="Marker2D" parent="CustomerManager"]
+position = Vector2(-82, 594)
+
+[connection signal="timeout" from="CustomerManager/SpawnTimer" to="CustomerManager" method="_on_spawn_timer_timeout"]

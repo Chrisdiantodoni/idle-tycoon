@@ -1,0 +1,18 @@
+[gd_resource type="Resource" script_class="Item" load_steps=3 format=3 uid="uid://mgurk8um5dby"]
+
+[ext_resource type="Script" uid="uid://d4aqqk4ls526g" path="res://data/Item.gd" id="1_mstmi"]
+[ext_resource type="Texture2D" uid="uid://1r2jwwlsrndi" path="res://Assets/Sprites/UI/Burger.png" id="2_o6pxv"]
+
+[resource]
+script = ExtResource("1_mstmi")
+id = "Burger"
+type = 1
+sprite = ExtResource("2_o6pxv")
+cook_time = 10.0
+cook_time_reduce_percent = 0.8
+upgrade_cost = 4.0
+upgrade_multi = 1.4
+profit = 4.0
+profit_multi = 1.2
+max_level = 75
+metadata/_custom_type_script = "uid://d4aqqk4ls526g"

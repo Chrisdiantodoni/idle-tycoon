@@ -55,6 +55,7 @@ offset_left = 9.0
 offset_top = 16.0
 offset_right = 74.0
 offset_bottom = 81.0
+scale = Vector2(0.9, 0.9)
 texture = ExtResource("4_gmb23")
 expand_mode = 1
 
