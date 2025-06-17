@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://dvs8qugs8x5ya"]
+[gd_scene load_steps=17 format=3 uid="uid://dvs8qugs8x5ya"]
 
 [ext_resource type="Texture2D" uid="uid://dhe7eawv0nl5d" path="res://Assets/Sprites/Bakground.png" id="1_fwxkx"]
 [ext_resource type="Texture2D" uid="uid://dup5i2mf4tg7s" path="res://Assets/Sprites/Counter.png" id="2_qmv3x"]
@@ -14,6 +14,8 @@
 [ext_resource type="Resource" uid="uid://b5d7762c6gqep" path="res://data/customer_red.tres" id="12_33n3b"]
 [ext_resource type="Resource" uid="uid://qu476hfkiowf" path="res://data/customer_yellow.tres" id="13_rxmp4"]
 [ext_resource type="PackedScene" uid="uid://b0abptabrbn62" path="res://Customer/customer.tscn" id="14_4lqr4"]
+[ext_resource type="Script" uid="uid://c162mdw5pgifd" path="res://Game/counter_manager.gd" id="15_qlwvw"]
+[ext_resource type="Script" uid="uid://nobx04wv8ef3" path="res://Game/cashier_manager.gd" id="15_rpdke"]
 
 [node name="Game" type="Node2D"]
 
@@ -46,10 +48,8 @@ position = Vector2(-65, -65.5555)
 scale = Vector2(0.35, 0.35)
 texture = ExtResource("5_kul4i")
 
-[node name="Cashier" parent="." instance=ExtResource("6_qmv3x")]
-position = Vector2(537, 1100)
-
 [node name="CustomerManager" type="Node" parent="." node_paths=PackedStringArray("spawn_positions")]
+unique_name_in_owner = true
 script = ExtResource("7_oomkl")
 spawn_positions = [NodePath("TopSpawnPos"), NodePath("BottomSpawnPos")]
 customer_sprites = Array[ExtResource("8_72g0p")]([ExtResource("9_4lqr4"), ExtResource("10_qlwvw"), ExtResource("11_rpdke"), ExtResource("12_33n3b"), ExtResource("13_rxmp4")])
@@ -64,5 +64,33 @@ position = Vector2(-67, 205)
 
 [node name="BottomSpawnPos" type="Marker2D" parent="CustomerManager"]
 position = Vector2(-82, 594)
+
+[node name="CounterManager" type="Node" parent="." node_paths=PackedStringArray("counter_positions")]
+unique_name_in_owner = true
+script = ExtResource("15_qlwvw")
+counter_positions = [NodePath("Pos_0"), NodePath("Pos_1"), NodePath("Pos_2"), NodePath("Pos_3")]
+
+[node name="Pos_0" type="Marker2D" parent="CounterManager"]
+position = Vector2(381, 718)
+
+[node name="Pos_1" type="Marker2D" parent="CounterManager"]
+position = Vector2(481, 718)
+
+[node name="Pos_2" type="Marker2D" parent="CounterManager"]
+position = Vector2(581, 718)
+
+[node name="Pos_3" type="Marker2D" parent="CounterManager"]
+position = Vector2(681, 718)
+
+[node name="CashierManager" type="Node" parent="." node_paths=PackedStringArray("spawn_pos")]
+script = ExtResource("15_rpdke")
+cashier_scene = ExtResource("6_qmv3x")
+spawn_pos = NodePath("Marker2D")
+
+[node name="Marker2D" type="Marker2D" parent="CashierManager"]
+position = Vector2(541, 1092)
+
+[node name="Marker2D" type="Marker2D" parent="."]
+position = Vector2(665, 1250)
 
 [connection signal="timeout" from="CustomerManager/SpawnTimer" to="CustomerManager" method="_on_spawn_timer_timeout"]
